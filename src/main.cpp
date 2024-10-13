@@ -1,15 +1,14 @@
 #include <QApplication>
 #include <QPushButton>
 
+#include "core/App.h"
+
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
 
-  app.setApplicationName("OpenMusica");
-  app.setApplicationVersion("0.1");
+  App appWindow;
 
-  QPushButton button("Hello, Wayland!");
-  button.resize(200, 60);
-  button.show();
+  appWindow.show();
 
   return app.exec();
 }

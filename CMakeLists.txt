@@ -10,8 +10,21 @@ set(CMAKE_GENERATOR "Ninja")
 
 find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
 
+set(CMAKE_AUTOMOC ON)
+
+include_directories(${CMAKE_SOURCE_DIR}/src/core)
+
+set(SOURCES
+    src/main.cpp
+    src/core/App.cpp
+)
+
+set(HEADERS
+    src/core/App.h
+)
+
 add_executable(OpenMusica
-  src/main.cpp
+  ${SOURCES}
 )
 
 target_link_libraries(OpenMusica PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
