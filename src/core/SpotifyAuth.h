@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ConfigManager.h"
 #include <QDesktopServices>
 #include <QOAuth2AuthorizationCodeFlow>
 #include <QOAuthHttpServerReplyHandler>

@@ -3,10 +3,8 @@
 
 SpotifyAuth::SpotifyAuth(QObject *parent)
     : QObject(parent), oauth2(new QOAuth2AuthorizationCodeFlow(this)) {
-
-  ConfigManager config;
-  QString clientId = config.clientId();
-  QString clientSecret = config.clientSecret();
+  QString clientId = ConfigManager::instance().clientId();
+  QString clientSecret = ConfigManager::instance().clientSecret();
 
   auto replyHandler = new QOAuthHttpServerReplyHandler(9994, this);
   oauth2->setReplyHandler(replyHandler);
@@ -26,5 +24,8 @@ SpotifyAuth::SpotifyAuth(QObject *parent)
 
 void SpotifyAuth::granted() {
   qDebug() << "Access token:" << oauth2->token();
+
+  ConfigManager::instance().saveAccessToken(oauth2->token());
+
   emit authenticated();
 }
