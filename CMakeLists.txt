@@ -15,16 +15,23 @@ set(CMAKE_AUTOMOC ON)
 include_directories(${CMAKE_SOURCE_DIR}/src/core)
 
 set(SOURCES
-    src/main.cpp
-    src/core/MainWindow.cpp
-    src/core/SpotifyAuth.cpp
-    src/core/ConfigManager.cpp
+  src/main.cpp
+
+  src/core/MainWindow.cpp
+  src/core/SpotifyAuth.cpp
+  src/core/ConfigManager.cpp
+
+  src/ui/HomeWidget.cpp
+  src/ui/LoginWidget.cpp
 )
 
 set(HEADERS
   src/core/MainWindow.h
   src/core/SpotifyAuth.h
   src/core/ConfigManager.h
+
+  src/ui/HomeWidget.h
+  src/ui/LoginWidget.h
 )
 
 add_executable(OpenMusica

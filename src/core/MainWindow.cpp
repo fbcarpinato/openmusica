@@ -1,6 +1,9 @@
 #include "MainWindow.h"
 #include "ConfigManager.h"
 
+#include "../ui/HomeWidget.h"
+#include "../ui/LoginWidget.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), auth(new SpotifyAuth(this)), m_authenticated(false) {
   m_authenticated = !ConfigManager::instance().getAccessToken().isEmpty();
@@ -17,27 +20,20 @@ void MainWindow::onLogout() {
   ConfigManager::instance().deleteAccessToken();
   qDebug() << "Logged out!";
 
-  QPushButton *authButton = new QPushButton("Authenticate with Spotify", this);
-  setCentralWidget(authButton);
+  LoginWidget *loginWidget = new LoginWidget(this);
 
-  connect(authButton, &QPushButton::clicked, auth, &SpotifyAuth::grant);
+  connect(loginWidget, &LoginWidget::login, auth, &SpotifyAuth::grant);
   connect(auth, &SpotifyAuth::authenticated, this,
           &MainWindow::onAuthenticated);
+
+  setCentralWidget(loginWidget);
 }
 
 void MainWindow::onAuthenticated() {
   m_authenticated = true;
 
-  QLabel *label = new QLabel("Authenticated!", this);
+  HomeWidget *homeWidget = new HomeWidget(this);
+  connect(homeWidget, &HomeWidget::logout, this, &MainWindow::onLogout);
 
-  QPushButton *logoutButton = new QPushButton("Logout", this);
-  connect(logoutButton, &QPushButton::clicked, this, &MainWindow::onLogout);
-
-  QVBoxLayout *layout = new QVBoxLayout;
-  layout->addWidget(label);
-  layout->addWidget(logoutButton);
-
-  QWidget *widget = new QWidget(this);
-  widget->setLayout(layout);
-  setCentralWidget(widget);
+  setCentralWidget(homeWidget);
 }

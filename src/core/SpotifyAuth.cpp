@@ -13,7 +13,6 @@ SpotifyAuth::SpotifyAuth(QObject *parent)
   oauth2->setAccessTokenUrl(QUrl("https://accounts.spotify.com/api/token"));
   oauth2->setClientIdentifier(clientId);
   oauth2->setClientIdentifierSharedKey(clientSecret);
-  oauth2->setScope("user-read-private user-read-email");
 
   connect(oauth2, &QOAuth2AuthorizationCodeFlow::authorizeWithBrowser,
           &QDesktopServices::openUrl);
