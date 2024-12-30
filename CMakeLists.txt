@@ -23,6 +23,9 @@ set(SOURCES
 
   src/ui/HomeWidget.cpp
   src/ui/LoginWidget.cpp
+
+
+  src/api/SpotifyClient.cpp
 )
 
 set(HEADERS
@@ -32,6 +35,8 @@ set(HEADERS
 
   src/ui/HomeWidget.h
   src/ui/LoginWidget.h
+
+  src/api/SpotifyClient.h
 )
 
 add_executable(OpenMusica
