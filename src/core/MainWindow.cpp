@@ -37,11 +37,12 @@ void MainWindow::onAuthenticated() {
 
   SpotifyClient *spotifyClient =
       new SpotifyClient(ConfigManager::instance().getAccessToken());
-
   spotifyClient->fetchPlaylists();
 
   HomeWidget *homeWidget = new HomeWidget(this);
   connect(homeWidget, &HomeWidget::logout, this, &MainWindow::onLogout);
+  connect(spotifyClient, &SpotifyClient::playlistsFetched, homeWidget,
+          &HomeWidget::onPlaylistsFetched);
 
   setCentralWidget(homeWidget);
 }

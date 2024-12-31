@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QListWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -13,6 +14,12 @@ public:
 signals:
   void logout();
 
+public slots:
+  void onPlaylistsFetched(const QStringList &playlists);
+
 private slots:
   void onLogout();
+
+private:
+  QListWidget *playlistsWidget;
 };
